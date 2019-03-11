@@ -35,7 +35,7 @@
 </head>
 <body>
 <div id="app">
-  <g-button icon="setting" loading>
+  <g-button icon="setting" :loading="loading1" @click="loading1 = !loading1">
     按钮
   </g-button>
 

@@ -1,6 +1,7 @@
 <template>
   <button class="g-button" :class="`icon-${iconPosition}`">
-    <g-icon v-if="icon" :name="icon"></g-icon>
+    <g-icon v-if="icon" :name="icon" class="icon"></g-icon>
+    <g-icon v-if="loading" name="loading" class="loading"></g-icon>
     <div class="content">
       <slot></slot>
     </div>
@@ -19,7 +20,8 @@
           const allowValue = ['left', 'right']
           return allowValue.includes(value)
         }
-      }
+      },
+      loading: Boolean,
     }
   }
 </script>
@@ -51,7 +53,7 @@
       outline: none;
     }
 
-    > .g-icon {
+    > .icon {
       order: 1;
       margin-right: .3em;
     }
@@ -60,7 +62,7 @@
       order: 2;
     }
 
-    &.g-icon-right {
+    &.icon-right {
       > .icon {
         order: 2;
         margin-right: 0;
@@ -71,6 +73,18 @@
         order: 1;
       }
     }
+
+    .loading {
+      animation: spin 1s infinite linear;
+    }
   }
 
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 </style>

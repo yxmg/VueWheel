@@ -1,4 +1,5 @@
-name: wheel Vue轮子
-author: yxmg
+# Vuewheel Vue-UI组件库
+
+作者：yxmg
 
 

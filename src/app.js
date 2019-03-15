@@ -22,7 +22,7 @@ import spies from 'chai-spies'
 chai.use(spies)
 
 const expect = chai.expect
-// 单元测试
+// 单元测试1:含有Icon
 {
   const Constructor = Vue.extend(Button)
   const vm = new Constructor({
@@ -39,7 +39,7 @@ const expect = chai.expect
   vm.$destroy()
 }
 
-// 测试loading
+// 单元测试2：是否能loading
 {
   const Constructor = Vue.extend(Button)
   const vm = new Constructor({
@@ -54,7 +54,7 @@ const expect = chai.expect
   const useHref = useEl.getAttribute('xlink:href')
   expect(useHref).to.eq('#i-loading')
 }
-
+// 单元测试3：能正确设置图标位置 右
 {
   const divEl = document.createElement('div')
   document.body.appendChild(divEl)
@@ -74,6 +74,7 @@ const expect = chai.expect
   vm.$destroy()
 }
 
+// 单元测试4：能正确设置图标位置 左
 {
   const divEl = document.createElement('div')
   document.body.appendChild(divEl)
@@ -92,7 +93,7 @@ const expect = chai.expect
   vm.$destroy()
 }
 
-// 能监听click - mock
+// 单元测试5：能监听click - mock
 {
   const spy = chai.spy(() => {})
   const Constructor = Vue.extend(Button)

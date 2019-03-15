@@ -107,5 +107,5 @@ const expect = chai.expect
 
   const buttonEl = vm.$el
   buttonEl.click()
-  expect(spy).to.have.been.called()
+  expect(spy).to.have.been.called
 }

@@ -8,74 +8,87 @@ import Button from '../src/button'
 Vue.config.productionTip = false
 Vue.config.devtools = false
 
-describe('Button', () => {
-  it('存在.', () => {
+function createButtonVm(initData) {
+  const Constructor = Vue.extend(Button)
+  const vm = new Constructor(initData)
+  return vm
+}
+
+describe('Button组件', () => {
+  it('按钮是否存在', () => {
     expect(Button).to.be.ok
   })
-  it('可以设置icon.', () => {
-    const Constructor = Vue.extend(Button)
-    const vm = new Constructor({
+  it('可以设置Icon', () => {
+    const vm = createButtonVm({
       propsData: {
-        icon: 'settings'
+        icon: 'setting'
       }
-    }).$mount()
-    const useElement = vm.$el.querySelector('use')
-    expect(useElement.getAttribute('xlink:href')).to.equal('#i-settings')
+    })
+
+    vm.$mount()
+
+    const useEl = vm.$el.querySelector('use')
+    const useHref = useEl.getAttribute('xlink:href')
+    expect(useHref).to.be.equal('#i-setting')
+
     vm.$destroy()
   })
-  it('可以设置loading.', () => {
-    const Constructor = Vue.extend(Button)
-    const vm = new Constructor({
+  it('按钮Icon能否进入loading状态', () => {
+    const vm = createButtonVm({
       propsData: {
-        icon: 'settings',
         loading: true
       }
-    }).$mount()
-    const useElements = vm.$el.querySelectorAll('use')
-    expect(useElements.length).to.equal(1)
-    expect(useElements[0].getAttribute('xlink:href')).to.equal('#i-loading')
-    vm.$destroy()
-  })
-  it('icon 默认的 order 是 1', () => {
-    const div = document.createElement('div')
-    document.body.appendChild(div)
-    const Constructor = Vue.extend(Button)
-    const vm = new Constructor({
-      propsData: {
-        icon: 'settings',
-      }
-    }).$mount(div)
-    const icon = vm.$el.querySelector('svg')
-    expect(getComputedStyle(icon).order).to.eq('1')
-    vm.$el.remove()
-    vm.$destroy()
-  })
-  it('设置 iconPosition 可以改变 order', () => {
-    const div = document.createElement('div')
-    document.body.appendChild(div)
-    const Constructor = Vue.extend(Button)
-    const vm = new Constructor({
-      propsData: {
-        icon: 'settings',
-        iconPosition: 'right'
-      }
-    }).$mount(div)
-    const icon = vm.$el.querySelector('svg')
-    expect(getComputedStyle(icon).order).to.eq('2')
-    vm.$el.remove()
-    vm.$destroy()
-  })
-  it('点击 button 触发 click 事件', () => {
-    const Constructor = Vue.extend(Button)
-    const vm = new Constructor({
-      propsData: {
-        icon: 'settings',
-      }
-    }).$mount()
+    })
+    vm.$mount()
 
-    const callback = sinon.fake();
-    vm.$on('click', callback)
+    const useEls = vm.$el.querySelectorAll('use')
+    expect(useEls.length).to.be.equal(1)
+    const useHref = useEls[0].getAttribute('xlink:href')
+    expect(useHref).to.be.equal('#i-loading')
+  })
+  it('可以将Icon位置设置在左边', () => {
+    const vm = createButtonVm({
+      propsData: {
+        icon: 'setting',
+        iconPosition: 'left',
+      }
+    })
+    const div = document.createElement('div')
+    document.body.appendChild(div)
+    vm.$mount(div)
+
+    const svgEl = vm.$el.querySelector('svg')
+
+    expect(getComputedStyle(svgEl).order).to.be.equal('1')
+    div.remove()
+    vm.$destroy()
+  })
+  it('可以将Icon位置设置在右边', () => {
+    const vm = createButtonVm({
+      propsData: {
+        icon: 'setting',
+        iconPosition: 'right',
+      }
+    })
+    const div = document.createElement('div')
+    document.body.appendChild(div)
+    vm.$mount(div)
+
+    const svgEl = vm.$el.querySelector('svg')
+    const contentEl = vm.$el.querySelector('.content')
+    expect(getComputedStyle(svgEl).order).to.be.equal('2')
+    expect(getComputedStyle(contentEl).order).to.be.equal('1')
+
+    div.remove()
+    vm.$destroy()
+  })
+  it('按钮点击事件能否被正常触发', () => {
+    const vm = createButtonVm()
+    vm.$mount()
+
+    const mockFn = sinon.fake()
+    vm.$on('click',mockFn)
     vm.$el.click()
-    expect(callback).to.have.been.called()
+    expect(mockFn).to.have.been.called
   })
 })

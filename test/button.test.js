@@ -16,7 +16,7 @@ function createButtonVm(initData) {
 
 describe('Button组件', () => {
   it('按钮是否存在', () => {
-    expect(Button).to.be.ok
+    expect(Button).to.be.exist
   })
   it('可以设置Icon', () => {
     const vm = createButtonVm({
@@ -29,7 +29,7 @@ describe('Button组件', () => {
 
     const useEl = vm.$el.querySelector('use')
     const useHref = useEl.getAttribute('xlink:href')
-    expect(useHref).to.be.equal('#i-setting')
+    expect(useHref).to.eq('#i-setting')
 
     vm.$destroy()
   })
@@ -42,9 +42,9 @@ describe('Button组件', () => {
     vm.$mount()
 
     const useEls = vm.$el.querySelectorAll('use')
-    expect(useEls.length).to.be.equal(1)
+    expect(useEls.length).to.eq(1)
     const useHref = useEls[0].getAttribute('xlink:href')
-    expect(useHref).to.be.equal('#i-loading')
+    expect(useHref).to.eq('#i-loading')
   })
   it('可以将Icon位置设置在左边', () => {
     const vm = createButtonVm({
@@ -59,7 +59,7 @@ describe('Button组件', () => {
 
     const svgEl = vm.$el.querySelector('svg')
 
-    expect(getComputedStyle(svgEl).order).to.be.equal('1')
+    expect(getComputedStyle(svgEl).order).to.eq('1')
     div.remove()
     vm.$destroy()
   })
@@ -76,8 +76,8 @@ describe('Button组件', () => {
 
     const svgEl = vm.$el.querySelector('svg')
     const contentEl = vm.$el.querySelector('.content')
-    expect(getComputedStyle(svgEl).order).to.be.equal('2')
-    expect(getComputedStyle(contentEl).order).to.be.equal('1')
+    expect(getComputedStyle(svgEl).order).to.eq('2')
+    expect(getComputedStyle(contentEl).order).to.eq('1')
 
     div.remove()
     vm.$destroy()

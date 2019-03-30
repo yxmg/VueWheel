@@ -10,7 +10,7 @@
     mounted() {
       for (let node of this.$el.children) {
         const nodeName = node.nodeName.toLowerCase()
-        if (nodeName === 'button') {
+        if (nodeName !== 'button') {
           console.warn(`g-button-group的子元素必须全是button,但现在为${nodeName}`)
         }
       }

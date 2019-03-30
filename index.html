@@ -31,25 +31,47 @@
     body {
       font-size: var(--font-size);
     }
+
+    .split-line {
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+
+    .box {
+      margin: 20px;
+    }
   </style>
 </head>
 <body>
 <div id="app">
-  <g-button icon="setting" :loading="loading1" @click="loading1 = !loading1">
-    按钮
-  </g-button>
+  <div class="box">
+    <g-button icon="setting" :loading="loading1" @click="loading1 = !loading1">
+      按钮
+    </g-button>
 
-  <g-button icon="setting" icon-position="right">
-    按钮
-  </g-button>
+    <g-button icon="setting" icon-position="right">
+      按钮
+    </g-button>
 
-  <g-button-group>
-    <g-button icon="left-arrow">上一页</g-button>
-    <g-button>更多</g-button>
-    <g-button icon="right-arrow" icon-position="right">下一页</g-button>
-  </g-button-group>
+    <g-button-group>
+      <g-button icon="left-arrow">上一页</g-button>
+      <g-button>更多</g-button>
+      <g-button icon="right-arrow" icon-position="right">下一页</g-button>
+    </g-button-group>
+  </div>
 
-  <div id="test"></div>
+  <hr class="split-line">
+
+  <div class="box">
+    <g-input value="张三" disabled></g-input>
+    <g-input value="李四" readonly></g-input>
+    <g-input value="王五"></g-input>
+  </div>
+
+  <div class="box">
+    <g-input value="赵六" error="姓名不能少于两个字"></g-input>
+  </div>
+
 </div>
 <script src="./src/app.js"></script>
 <script src="//at.alicdn.com/t/font_422978_x20f854c9ib.js"></script>

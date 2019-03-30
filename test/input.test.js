@@ -80,15 +80,19 @@ describe('Button组件', () => {
       vm.$destroy()
     });
     it('支持change/input/focus/blur事件', () => {
-      const eventNameList = ['change','input','focus','blur']
+      const eventNameList = ['change', 'input', 'focus', 'blur']
       vm = createInputVm({}).$mount()
       eventNameList.forEach(eventName => {
         let callback = sinon.fake()
         vm.$on('change', callback)
         const event = new Event('change')
+        Object.defineProperty(event, 'target', {
+          value: {value: 'test'},
+          enumerable: true
+        })
         let inputEl = vm.$el.querySelector('input')
         inputEl.dispatchEvent(event)
-        expect(callback).to.have.been.calledWith(event)
+        expect(callback).to.have.been.calledWith('test')
       })
     })
 

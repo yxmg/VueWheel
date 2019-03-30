@@ -16,6 +16,10 @@ new Vue({
   el: '#app',
   data: {
     loading1: false,
+    input1: '张三',
+    input2: '李四',
+    input3: '王五',
+    input4: '赵六',
   }
 })
 

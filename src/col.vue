@@ -93,24 +93,6 @@
 <style lang="scss" scoped>
   .g-col {
     width: 50%;
-
-    $class-prefix: col-;
-    @for $n from 1 through 24 {
-      &.#{$class-prefix}#{$n} {
-        width: ($n / 24) * 100%;
-      }
-    }
-
-    $class-prefix: offset-;
-
-    @for $n from 1 through 24 {
-      &.#{$class-prefix}#{$n} {
-        margin-left: ($n / 24) * 100%;
-      }
-    }
-
-    // 默认为PC尺寸，993px-1200px
-
     // phone
     @media (min-width: 576px) {
       $class-prefix: col-phone-;
@@ -144,6 +126,22 @@
         &.#{$class-prefix}#{$n} {
           margin-left: ($n / 24) * 100%;
         }
+      }
+    }
+
+    // 默认为PC尺寸，993px-1200px
+    $class-prefix: col-;
+    @for $n from 1 through 24 {
+      &.#{$class-prefix}#{$n} {
+        width: ($n / 24) * 100%;
+      }
+    }
+
+    $class-prefix: offset-;
+
+    @for $n from 1 through 24 {
+      &.#{$class-prefix}#{$n} {
+        margin-left: ($n / 24) * 100%;
       }
     }
 

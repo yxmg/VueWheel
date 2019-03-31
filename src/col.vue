@@ -1,9 +1,6 @@
 <template>
-  <div class="g-col" :class="[span && `col-${span}`, offset && `offset-${offset}`]"
-       :style="{paddingLeft: `${gutter/2}px`,paddingRight: `${gutter/2}px`}">
-    <div class="g-col-content">
-      <slot></slot>
-    </div>
+  <div class="g-col" :class="colClass" :style="colStyle">
+    <slot></slot>
   </div>
 </template>
 
@@ -17,6 +14,19 @@
     data() {
       return {
         gutter: 0
+      }
+    },
+    computed: {
+      colClass() {
+        const { span, offset } = this
+        return [span && `col-${span}`, offset && `offset-${offset}`]
+      },
+      colStyle() {
+        const { gutter } = this
+        return {
+          paddingLeft: `${gutter / 2}px`,
+          paddingRight: `${gutter / 2}px`
+        }
       }
     }
   }
@@ -40,11 +50,5 @@
         margin-left: ($n / 24) * 100%;
       }
     }
-  }
-
-  .g-col-content {
-    border: 1px solid #000;
-    background: lightsteelblue;
-    height: 100px;
   }
 </style>

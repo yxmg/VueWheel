@@ -1,5 +1,5 @@
 <template>
-  <div class="row" :style="rowStyle">
+  <div class="row" :style="rowStyle" :class="rowClass">
     <slot></slot>
   </div>
 </template>
@@ -8,7 +8,13 @@
   export default {
     name: "g-rol",
     props: {
-      gutter: [Number, String]
+      gutter: [Number, String],
+      align: {
+        type: String,
+        validator(value) {
+          return ['left', 'center', 'right'].includes(value)
+        }
+      }
     },
     computed: {
       rowStyle() {
@@ -17,6 +23,10 @@
           marginLeft: -gutter / 2 + 'px',
           marginRight: -gutter / 2 + 'px'
         }
+      },
+      rowClass() {
+        const { align } = this
+        return [align && `align-${align}`]
       }
     },
     mounted() {
@@ -31,6 +41,21 @@
 <style lang="scss" scoped>
   .row {
     display: flex;
-
   }
+
+  .align {
+
+    &-left {
+      justify-content: flex-start;
+    }
+
+    &-center {
+      justify-content: center;
+    }
+
+    &-right {
+      justify-content: flex-end;
+    }
+  }
+
 </style>

@@ -5,6 +5,25 @@
 </template>
 
 <script>
+  const checkIsLessThanTwentyFour = (value) => {
+    if (value > 0 && value <= 24 && value % 1 === 0) {
+      return true
+    } else {
+      console.warn('span或offset必须为小于24的正整数')
+      return false
+    }
+  }
+  const checkOnlySpanOrOffset = (value) => {
+    const keys = Object.keys(value)
+    let valid = true
+    keys.forEach(key => {
+      valid = ['span', 'offset'].includes(key)
+    })
+    if (!valid) {
+      console.warn('只允许key值为span或offset')
+    }
+    return valid
+  }
   export default {
     name: "g-col",
     props: {
@@ -36,17 +55,17 @@
   .g-col {
     width: 50%;
 
-    $class-prefix1: col-;
+    $class-prefix: col-;
     @for $n from 1 through 24 {
-      &.#{$class-prefix1}#{$n} {
+      &.#{$class-prefix}#{$n} {
         width: ($n / 24) * 100%;
       }
     }
 
-    $class-prefix2: offset-;
+    $class-prefix: offset-;
 
     @for $n from 1 through 24 {
-      &.#{$class-prefix2}#{$n} {
+      &.#{$class-prefix}#{$n} {
         margin-left: ($n / 24) * 100%;
       }
     }
